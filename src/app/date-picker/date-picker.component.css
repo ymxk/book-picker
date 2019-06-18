@@ -7,6 +7,7 @@
   }
 
   .drag-scroll-item{
+    border: 1px #fff solid;
     background-color: #fff;
     height: 30px;
     line-height: 30px;
@@ -16,19 +17,29 @@
   }
   
   .drag-scroll-item div:first-child{
-    height:18px;
+    padding: 0px 5px;
     font-size:13px;
     font-family:PingFangSC-Regular;
     font-weight:400;
     color:rgba(153,153,153,1);
-    line-height:18px;
   }
 
    .drag-scroll-item div:last-child{
-    height:21px;
+     padding: 0px 5px;
     font-size:15px;
     font-family:PingFangSC-Medium;
     font-weight:500;
     color:rgba(36,36,36,1);
-    line-height:21px;
+  }
+
+  .date-title{
+    width:100%;
+    height:46px;
+    line-height:46px;
+    background:rgba(248,248,248,1);
+    /* font-size:17px; */
+    font-family:PingFangSC-Medium;
+    font-weight:1000;
+    color:rgba(36,36,36,1);
+    text-align: center;
   }

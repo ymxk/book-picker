@@ -9,18 +9,21 @@ import { DatePicker } from '../DatePicker'
 })
 export class DatePickerComponent implements OnInit {
   days: any[] = [];
-  item: any = moment();
+  selected: any = moment();
   endDayForMonth: any = moment().endOf('month');
 
   constructor() { }
 
   ngOnInit() {
-    console.log(moment().isBefore(this.endDayForMonth));
-    // while (moment().isBefore(this.endDayForMonth)) {
-    //   this.item.add(1, 'd');
-    //   this.days.push(this.item);
-    // }
+    this.getDaysForMonth();
 
+    console.log(moment().day());
+  }
+
+  getDaysForMonth() {
+    for (let item = moment(); item.isBefore(this.endDayForMonth); item.add(1, 'd')) {
+      this.days.push(item.clone());
+    }
   }
 
 }
