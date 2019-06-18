@@ -1,0 +1,12 @@
+ .drag-scroll-content {
+    background-color: #fff;
+    min-width: 100%;
+    min-height: 200px;
+    display: flex;
+  }
+
+  .drag-scroll-item{
+    background-color: #e74c3c;
+    min-width: 200px;
+    margin: 5px;
+  }
