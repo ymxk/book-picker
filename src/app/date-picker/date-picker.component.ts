@@ -15,11 +15,11 @@ export class DatePickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
-    while (moment().isBefore(this.endDayForMonth)) {
-      this.item.add(1, 'd');
-      this.days.push(this.item);
-    }
+    console.log(moment().isBefore(this.endDayForMonth));
+    // while (moment().isBefore(this.endDayForMonth)) {
+    //   this.item.add(1, 'd');
+    //   this.days.push(this.item);
+    // }
 
   }
 
