@@ -62,13 +62,11 @@ export class TimePickerComponent implements OnInit {
       const y = parseFloat(moment().format('mm')) % 30;
       start = moment().subtract(y, 'm').add(30, 'm');
     } else {
-      console.log("other ");
       start = this.nowTime.startOf('day');
     }
     let end = start.clone().endOf('day');
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
       this.hours.push(item.clone());
-      console.log(item);
     }
   }
 
@@ -80,6 +78,7 @@ export class TimePickerComponent implements OnInit {
       if (changedProp.isFirstChange()) {
         this.nowTime = moment();
       } else {
+        // console.log(changedProp.currentValue);
         this.nowTime = changedProp.currentValue;
         this.getHoursForDays();
       }
