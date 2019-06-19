@@ -58,11 +58,11 @@ export class TimePickerComponent implements OnInit {
     this.hours = [];
     let start;
     if (moment().isSame(this.nowTime, 'day')) {
-      console.log("now");
+      console.log("now ");
       const y = parseFloat(moment().format('mm')) % 30;
       start = moment().subtract(y, 'm').add(30, 'm');
     } else {
-      console.log("other");
+      console.log("other ");
       start = this.nowTime.startOf('day');
     }
     for (let item = start; item.isBefore(start.clone().endOf('day')); item.add(30, 'm')) {
