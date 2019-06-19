@@ -1,6 +1,6 @@
 <div class="date-title">{{selected | amDateFormat: 'YYYY'}}</div>
 <section class="card">
-	<div class="card--content" *ngFor="let day of days">
+	<div class="card--content" *ngFor="let day of days" [ngClass]="isSameDay(day)" (click)="onSelected(day)">
 		<div>{{day | weekdays}}</div>
 		<div>{{day | amDateFormat: 'M-D'}}</div>
 	</div>

@@ -17,6 +17,14 @@ export class DatePickerComponent implements OnInit {
     this.getDaysForMonth();
   }
 
+  onSelected(value: moment.Moment) {
+    this.selected = value;
+  }
+
+  isSameDay(value: moment.Moment) {
+    return this.selected.isSame(value, 'day') ? 'date-selected' : '';
+  }
+
   getDaysForMonth() {
     for (let item = moment(); item.isBefore(this.endDayForMonth); item.add(1, 'd')) {
       this.days.push(item.clone());
