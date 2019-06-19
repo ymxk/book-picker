@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import moment from 'moment';
 
 @Component({
@@ -7,9 +7,10 @@ import moment from 'moment';
   styleUrls: ['./date-picker.component.css']
 })
 export class DatePickerComponent implements OnInit {
-  days: any[] = [];
-  selected: any = moment();
-  endDayForMonth: any = moment().add(15, 'd');
+  days: moment.Moment[] = [];
+  selectedDate: moment.Moment = moment();
+  endDayForMonth: moment.Moment = moment().add(15, 'd');
+  @Output() selected = new EventEmitter<moment.Moment>();
 
   constructor() { }
 
@@ -18,11 +19,12 @@ export class DatePickerComponent implements OnInit {
   }
 
   onSelected(value: moment.Moment) {
-    this.selected = value;
+    this.selectedDate = value;
+    this.selected.emit(value);
   }
 
   isSameDay(value: moment.Moment) {
-    return this.selected.isSame(value, 'day') ? 'date-selected' : '';
+    return this.selectedDate.isSame(value, 'day') ? 'date-selected' : '';
   }
 
   getDaysForMonth() {
