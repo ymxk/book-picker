@@ -1,6 +1,6 @@
 <div class="date-title">{{selected | amDateFormat: 'YYYY-MM'}}</div>
-<section class="drag-scroll-content">
-	<div class="drag-scroll-item" *ngFor="let day of days">
+<section class="card">
+	<div class="card--content" *ngFor="let day of days">
 		<div>{{day | weekdays}}</div>
 		<div>{{day | amDateFormat: 'D'}}</div>
 	</div>
