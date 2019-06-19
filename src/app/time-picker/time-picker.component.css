@@ -26,3 +26,8 @@
   background: #EDEDED;
   opacity:0.17489999999999997;
 }
+.time-selected{
+  opacity:0.1;
+  background:#007AFF;
+  color:#007AFF;
+}
