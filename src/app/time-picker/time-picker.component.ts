@@ -9,7 +9,6 @@ import moment from 'moment';
 export class TimePickerComponent implements OnInit {
   hours: moment.Moment[] = [];
   @Input() nowTime: moment.Moment = moment();
-  endDayForMonth: moment.Moment = moment().endOf('day');
   start: moment.Moment;
   end: moment.Moment;
 
@@ -56,10 +55,16 @@ export class TimePickerComponent implements OnInit {
   }
 
   getHoursForDays() {
-    console.log(this.nowTime.format('YYYY-MM-D HH-mm'));
     this.hours = [];
-    const y = parseFloat(this.nowTime.format('mm')) % 30;
-    for (let item = this.nowTime.subtract(y, 'm').add(30, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
+    let start = moment();
+    if(moment().isSame(this.nowTime, 'day')){
+      const y = parseFloat(moment().format('mm')) % 30;
+      start = moment().subtract(y, 'm').add(30, 'm'); 
+    }else{
+      start = this.nowTime.startOf('minute');
+    }
+    console.log(start.format('YYYY-MM-D HH-mm'));
+    for (let item = start; item.isBefore(this.start.endOf('day')); item.add(30, 'm')) {
       this.hours.push(item.clone());
     }
   }
@@ -72,7 +77,6 @@ export class TimePickerComponent implements OnInit {
       if (changedProp.isFirstChange()) {
         this.nowTime = moment();
       } else {
-        moment().isSame(this.nowTime, 'day') ? moment() : moment();
         this.nowTime = changedProp.currentValue;
         this.getHoursForDays();
       }
