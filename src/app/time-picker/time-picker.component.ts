@@ -46,7 +46,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   getClassForTimeCell(value: moment.Moment) {
-    if (value.isBefore(this.nowTime, 'minute')) {
+    if (value.isBefore(this.nowTime, 'minute') && moment().isSame(this.nowTime, 'day')) {
       return 'time-disable'
     }
     if (value.isBetween(this.start, this.end, 'minute') || value.isSame(this.start, 'minute') || value.isSame(this.end, 'minute')) {
