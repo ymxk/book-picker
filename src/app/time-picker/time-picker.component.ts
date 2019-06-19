@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import moment from 'moment';
+import { TimeRange } from '../time-range';
 
 @Component({
   selector: 'app-time-picker',
@@ -9,6 +10,7 @@ import moment from 'moment';
 export class TimePickerComponent implements OnInit {
   hours: moment.Moment[] = [];
   @Input() nowTime: moment.Moment = moment();
+  @Output() selected = new EventEmitter<TimeRange>();
   start: moment.Moment;
   end: moment.Moment;
 
@@ -23,13 +25,19 @@ export class TimePickerComponent implements OnInit {
     this.end = null;
   }
 
+  emitSelected() {
+    this.selected.emit({ start: this.start, end: this.end });
+  }
+
   onSelected(value: moment.Moment) {
     if (this.start && this.end && this.start.isSame(value, 'minute')) {
       this.start = this.end;
+      this.emitSelected();
       return false;
     }
     if (this.start && this.end && this.end.isSame(value, 'minute')) {
       this.end = this.start;
+      this.emitSelected();
       return false;
     }
     if (!this.start && !this.end) {
@@ -43,6 +51,7 @@ export class TimePickerComponent implements OnInit {
     if (value.isAfter(this.start)) {
       this.end = value;
     }
+    this.emitSelected();
   }
 
   getClassForTimeCell(value: moment.Moment) {
