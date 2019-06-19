@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import moment from 'moment';
-import { TimeRange } from '.time-range';
+import { TimeRange } from './time-range';
 
 @Component({
   selector: 'my-app',
@@ -10,6 +10,7 @@ import { TimeRange } from '.time-range';
 export class AppComponent {
   name = 'Book Picker';
   selectedDate: moment.Moment;
+  timeRange: TimeRange;
 
   onSelectedDate(value: moment.Moment) {
     this.selectedDate = value.clone();
@@ -17,5 +18,6 @@ export class AppComponent {
 
   onSelectedTime(value: TimeRange) {
     console.log(value);
+    this.timeRange = value;
   }
 }
