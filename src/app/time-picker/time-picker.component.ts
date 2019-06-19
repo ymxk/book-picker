@@ -32,9 +32,6 @@ export class TimePickerComponent implements OnInit {
     if (this.start.isSame(value, 'minute')) {
       this.start = null;
     }
-    // if (value.isBetween(this.start, this.end, 'minute')) {
-    //   this.end = value;
-    // }
     if (value.isBefore(this.start)) {
       this.end = this.start;
       this.start = value;
@@ -56,7 +53,7 @@ export class TimePickerComponent implements OnInit {
 
   getHoursForDays() {
     const y = parseFloat(moment().format('mm')) % 30;
-    for (let item = moment().subtract(y, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
+    for (let item = moment().subtract(y, 'm').add(30, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
       this.hours.push(item.clone());
     }
   }
