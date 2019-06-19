@@ -7,9 +7,11 @@ import moment from 'moment';
   styleUrls: ['./time-picker.component.css']
 })
 export class TimePickerComponent implements OnInit {
-  hours: any[] = [];
-  selected: any = moment();
-  endDayForMonth: any = moment().endOf('day');
+  hours: moment.Moment[] = [];
+  nowTime: moment.Moment = moment();
+  endDayForMonth: moment.Moment = moment().endOf('day');
+  start: moment.Moment;
+  end: moment.Moment;
 
   constructor() { }
 
@@ -17,8 +19,12 @@ export class TimePickerComponent implements OnInit {
     this.getHoursForDays();
   }
 
+  onSelected(value: moment.Moment) {
+    console.log(this.start);
+  }
+
   getClassForTimeCell(value: moment.Moment){
-    if(value.isBefore(this.selected, 'minute')){
+    if(value.isBefore(this.nowTime, 'minute')){
       return 'time-disable'
     }
   }
