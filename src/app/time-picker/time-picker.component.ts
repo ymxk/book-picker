@@ -55,7 +55,8 @@ export class TimePickerComponent implements OnInit {
   }
 
   getHoursForDays() {
-    for (let item = moment().startOf('day'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
+    const y = parseFloat(moment().format('mm')) % 30;
+    for (let item = moment().subtract(y, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
       this.hours.push(item.clone());
     }
   }

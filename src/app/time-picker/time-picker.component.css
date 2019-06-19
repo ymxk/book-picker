@@ -27,7 +27,7 @@
   opacity:0.17489999999999997;
 }
 .time-selected div{
-  opacity:0.1;
-  background:#007AFF;
-  color:#007AFF;
+  background:#E5F2FF !important;
+  color:#007AFF !important;
+  border-left: 0px !important;
 }
