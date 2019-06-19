@@ -8,12 +8,19 @@ import moment from 'moment';
 })
 export class TimePickerComponent implements OnInit {
   hours: any[] = [];
+  selected: any = moment();
   endDayForMonth: any = moment().endOf('day');
 
   constructor() { }
 
   ngOnInit() {
     this.getHoursForDays();
+  }
+
+  getClassForTimeCell(value: moment.Moment){
+    if(value.isBefore(this.selected, 'minute')){
+      return 'time-disable'
+    }
   }
 
   getHoursForDays() {

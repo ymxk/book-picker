@@ -1,5 +1,5 @@
 <section class="card">
-	<div class="card--content" *ngFor="let h of hours">
+	<div class="card--content" *ngFor="let h of hours" [ngClass]="getClassForTimeCell(h)">
 		<div>{{h | amDateFormat: 'HH:mm'}}</div>
 	</div>
 </section>
