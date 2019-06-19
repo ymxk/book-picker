@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import moment from 'moment';
 
 @Component({
   selector: 'my-app',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  {
   name = 'Book Picker';
+
+  onSelectedDate(value: moment.Moment){
+    console.log('onSelectedDate', value);
+  }
 }
