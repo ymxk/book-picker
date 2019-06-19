@@ -9,7 +9,7 @@ import moment from 'moment';
 export class DatePickerComponent implements OnInit {
   days: any[] = [];
   selected: any = moment();
-  endDayForMonth: any = moment().endOf('month');
+  endDayForMonth: any = moment().add(15, 'd');
 
   constructor() { }
 
