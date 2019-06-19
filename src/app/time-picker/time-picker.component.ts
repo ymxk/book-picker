@@ -65,11 +65,11 @@ export class TimePickerComponent implements OnInit {
       console.log("other ");
       start = this.nowTime.startOf('day');
     }
-    console.log(start, start.clone().endOf('day'));
-    // for (let item = start; item.isBefore(start.clone().endOf('day')); item.add(30, 'm')) {
-    //   // this.hours.push(item.clone());
-      // console.log(item, start, start.clone().endOf('day'));
-    // }
+    let end = start.clone().endOf('day');
+    for (let item = start; item.isBefore(end); item.add(30, 'm')) {
+      this.hours.push(item.clone());
+      console.log(item);
+    }
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
