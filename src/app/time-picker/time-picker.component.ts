@@ -16,7 +16,7 @@ export class TimePickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.getHoursForDays(this.nowTime);
+    this.getHoursForDays();
   }
 
   onClear() {
@@ -55,9 +55,11 @@ export class TimePickerComponent implements OnInit {
     }
   }
 
-  getHoursForDays(start: moment.Moment) {
-    const y = parseFloat(start.format('mm')) % 30;
-    for (let item = start.subtract(y, 'm').add(30, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
+  getHoursForDays() {
+    console.log(this.nowTime.format('YYYY-MM-D HH-mm'));
+    this.hours = [];
+    const y = parseFloat(this.nowTime.format('mm')) % 30;
+    for (let item = this.nowTime.subtract(y, 'm').add(30, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
       this.hours.push(item.clone());
     }
   }
@@ -70,8 +72,9 @@ export class TimePickerComponent implements OnInit {
       if (changedProp.isFirstChange()) {
         this.nowTime = moment();
       } else {
+        moment().isSame(this.nowTime, 'day') ? moment() : moment();
         this.nowTime = changedProp.currentValue;
-        this.getHoursForDays(this.nowTime);
+        this.getHoursForDays();
       }
     }
   }
