@@ -65,8 +65,10 @@ export class TimePickerComponent implements OnInit {
       console.log("other ");
       start = this.nowTime.startOf('day');
     }
+    console.log(start, start.clone().endOf('day'));
     // for (let item = start; item.isBefore(start.clone().endOf('day')); item.add(30, 'm')) {
     //   // this.hours.push(item.clone());
+      // console.log(item, start, start.clone().endOf('day'));
     // }
   }
 
