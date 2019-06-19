@@ -11,6 +11,6 @@ export class AppComponent {
   selectedDate: moment.Moment;
 
   onSelectedDate(value: moment.Moment) {
-    this.selectedDate = value;
+    this.selectedDate = value.clone();
   }
 }

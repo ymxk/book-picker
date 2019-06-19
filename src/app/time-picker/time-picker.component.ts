@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
 import moment from 'moment';
 
 @Component({
@@ -8,7 +8,7 @@ import moment from 'moment';
 })
 export class TimePickerComponent implements OnInit {
   hours: moment.Moment[] = [];
-  nowTime: moment.Moment = moment();
+  @Input() nowTime: moment.Moment = moment();
   endDayForMonth: moment.Moment = moment().endOf('day');
   start: moment.Moment;
   end: moment.Moment;
@@ -16,7 +16,7 @@ export class TimePickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.getHoursForDays();
+    this.getHoursForDays(this.nowTime);
   }
 
   onClear() {
@@ -55,10 +55,24 @@ export class TimePickerComponent implements OnInit {
     }
   }
 
-  getHoursForDays() {
-    const y = parseFloat(moment().format('mm')) % 30;
-    for (let item = moment().subtract(y, 'm').add(30, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
+  getHoursForDays(start: moment.Moment) {
+    const y = parseFloat(start.format('mm')) % 30;
+    for (let item = start.subtract(y, 'm').add(30, 'm'); item.isBefore(this.endDayForMonth); item.add(30, 'm')) {
       this.hours.push(item.clone());
+    }
+  }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    let log: string[] = [];
+    for (let propName in changes) {
+      let changedProp = changes[propName];
+      let to = JSON.stringify(changedProp.currentValue);
+      if (changedProp.isFirstChange()) {
+        this.nowTime = moment();
+      } else {
+        this.nowTime = changedProp.currentValue;
+        this.getHoursForDays(this.nowTime);
+      }
     }
   }
 
