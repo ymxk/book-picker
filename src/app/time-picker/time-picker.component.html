@@ -3,5 +3,7 @@
 		<div>{{h | amDateFormat: 'HH:mm'}}</div>
 	</div>
 </section>
-<button (click)="onClear()">Clear</button>
-{{start | amDateFormat: 'HH:mm'}} - {{end | amDateFormat: 'HH:mm'}}
+<div style="display:none;">
+  <button (click)="onClear()">Clear</button>
+  {{start | amDateFormat: 'HH:mm'}} - {{end | amDateFormat: 'HH:mm'}}
+</div>

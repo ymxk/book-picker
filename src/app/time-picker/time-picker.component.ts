@@ -25,12 +25,17 @@ export class TimePickerComponent implements OnInit {
   }
 
   onSelected(value: moment.Moment) {
-    if (!this.start) {
-      this.start = value;
+    if (this.start && this.end && this.start.isSame(value, 'minute')) {
+      this.start = this.end;
       return false;
     }
-    if (this.start.isSame(value, 'minute')) {
-      this.start = null;
+    if (this.start && this.end && this.end.isSame(value, 'minute')) {
+      this.end = this.start;
+      return false;
+    }
+    if (!this.start && !this.end) {
+      this.start = value;
+      this.end = value;
     }
     if (value.isBefore(this.start)) {
       this.end = this.start;
@@ -39,7 +44,6 @@ export class TimePickerComponent implements OnInit {
     if (value.isAfter(this.start)) {
       this.end = value;
     }
-    console.log(this.start, this.end);
   }
 
   getClassForTimeCell(value: moment.Moment) {
