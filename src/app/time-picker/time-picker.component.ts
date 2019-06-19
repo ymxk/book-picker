@@ -19,33 +19,37 @@ export class TimePickerComponent implements OnInit {
     this.getHoursForDays();
   }
 
+  onClear() {
+    this.start = null;
+    this.end = null;
+  }
+
   onSelected(value: moment.Moment) {
-    if (this.start == undefined || this.start == null) {
+    if (!this.start) {
       this.start = value;
+      return false;
     }
     if (this.start.isSame(value, 'minute')) {
       this.start = null;
     }
-    if (this.end.isSame(value, 'minute')) {
-      this.end = null;
-    }
-    if (value.isBetween(this.start, this.end, 'minute')) {
-      this.end = value;
-    }
+    // if (value.isBetween(this.start, this.end, 'minute')) {
+    //   this.end = value;
+    // }
     if (value.isBefore(this.start)) {
       this.end = this.start;
       this.start = value;
     }
-    if (value.isBefore(this.end)) {
+    if (value.isAfter(this.start)) {
       this.end = value;
     }
+    console.log(this.start, this.end);
   }
 
   getClassForTimeCell(value: moment.Moment) {
     if (value.isBefore(this.nowTime, 'minute')) {
       return 'time-disable'
     }
-    if (value.isBetween(this.start, this.end, 'minute')) {
+    if (value.isBetween(this.start, this.end, 'minute') || value.isSame(this.start, 'minute') || value.isSame(this.end, 'minute')) {
       return 'time-selected'
     }
   }
