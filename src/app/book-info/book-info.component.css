@@ -1,0 +1,26 @@
+.book-info{
+  padding: 17px 20px;
+}
+
+.book-info label{
+  width:90px;
+  background:#D8D8D8;
+  border-radius:2px;
+  font-size:13px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:#999999;
+  line-height:23px;
+  display: inline-block;
+  text-align: center;
+}
+
+.book-info div:last-child {
+  height:24px;
+  line-height:24px;
+  font-size:15px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(36,36,36,1);
+  margin-top: 10px;
+}

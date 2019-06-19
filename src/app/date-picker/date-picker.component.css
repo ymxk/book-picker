@@ -4,7 +4,6 @@
 	min-width:100%;
 	min-height:86px;
   overflow-x: auto; 
-  border: 1px salmon solid;
 }
 .card::-webkit-scrollbar {
 	display:none;

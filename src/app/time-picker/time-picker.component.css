@@ -1,0 +1,25 @@
+.card {
+	display:flex;
+	background-color:#2c3e50;
+	min-width:100%;
+	min-height:54px;
+  overflow-x: auto; 
+  border: 1px rgba(233,233,233,1) solid;
+}
+.card::-webkit-scrollbar {
+	display:none;
+}
+.card--content {
+	min-width: 55px;
+  height:54px;
+	background-color:#fff;
+  text-align: center;
+}
+.card--content  div:first-child {
+  font-size:13px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(36,36,36,1);
+  line-height:54px;
+  border-left:1px rgba(233,233,233,1) solid;
+}

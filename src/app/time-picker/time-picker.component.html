@@ -1,1 +1,5 @@
-<p>app-time-picker</p>
+<section class="card">
+	<div class="card--content" *ngFor="let h of hours">
+		<div>{{h | amDateFormat: 'HH:mm'}}</div>
+	</div>
+</section>

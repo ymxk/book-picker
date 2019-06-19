@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
-import { DatePicker } from '../DatePicker'
 
 @Component({
   selector: 'app-date-picker',
@@ -16,8 +15,6 @@ export class DatePickerComponent implements OnInit {
 
   ngOnInit() {
     this.getDaysForMonth();
-
-    console.log(moment().day());
   }
 
   getDaysForMonth() {
