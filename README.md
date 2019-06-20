@@ -1,6 +1,9 @@
 # Book Picker
 
-![book-picker in action](https://github.com/ymxk/book-picker/blob/master/book-picker.gif)
+<p align="center">
+  <img width="416" height="405" src="https://github.com/ymxk/book-picker/blob/master/book-picker.gif">
+</p>
+
 
 - [Demo](#demo)
 - [Install](#install)
