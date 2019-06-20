@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { MomentModule } from 'ngx-moment';
 
 import { BookPickerComponent } from './book-picker.component';
@@ -12,7 +11,7 @@ import { TimetablePipe } from './pipe/timetable.pipe';
 import { BooktimePipe } from './pipe/booktime.pipe';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, MomentModule],
+  imports: [CommonModule, MomentModule],
   declarations: [TimePickerComponent, DatePickerComponent, BookInfoComponent, WeekdaysPipePipe, TimetablePipe, BooktimePipe, BookPickerComponent],
   exports: [BookPickerComponent]
 })
