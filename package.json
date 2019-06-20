@@ -1,7 +1,9 @@
 {
   "name": "angular",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": false,
+  "author": "Keno",
+  "license": "MIT",
   "dependencies": {
     "@angular/common": "8.0.1",
     "@angular/compiler": "8.0.1",
