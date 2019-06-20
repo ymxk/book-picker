@@ -4,7 +4,7 @@ import moment from 'moment';
 @Pipe({
   name: 'weekdays'
 })
-export class WeekdaysPipePipe implements PipeTransform {
+export class WeekdaysPipe implements PipeTransform {
   now: any = moment();
   weekdays: string[] = [
     "天", "一", "二", "三", "四", "五", "六"
