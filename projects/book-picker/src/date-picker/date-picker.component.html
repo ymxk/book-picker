@@ -1,4 +1,4 @@
-<div class="date-title">{{selected | amDateFormat: 'YYYY'}}</div>
+<div class="date-title">{{selectedDate | amDateFormat: 'YYYY'}}</div>
 <section class="card">
 	<div class="card--content" *ngFor="let day of days" [ngClass]="isSameDay(day)" (click)="onSelected(day)">
 		<div>{{day | weekdays}}</div>
