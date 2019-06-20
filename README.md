@@ -44,10 +44,6 @@ export class YourAppComponent {}
 
 ```
 
-After that, you can use the `featureToggle` components in your templates, passing the configuration data into the component itself.
-
-- `book-picker`: Handle the skeleton animation and the skeleton styles of your app;
-
 ```html
 <book-picker></book-picker>
 ```
