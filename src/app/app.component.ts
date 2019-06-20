@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   name = 'Book Picker';
+
+  onSelected(value: any){
+    console.log(value);
+  }
 }
