@@ -28,6 +28,8 @@ npm install book-picker --save
 You'll need to add `BookPickerModule` to your application module. So that, the `<book-picker>` components will be accessible in your application.
 
 ```typescript
+import { BookPickerModule } from 'book-picker';
+
 @NgModule({
   declarations: [
     AppComponent
