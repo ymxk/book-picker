@@ -1,6 +1,10 @@
 {
   "name": "book-picker",
   "version": "1.0.2",
+  "keywords": [
+    "bookings",
+    "meeting rooms"
+  ],
   "peerDependencies": {
     "@angular/common": "8.0.1",
     "@angular/compiler": "8.0.1",
