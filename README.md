@@ -1,7 +1,7 @@
 # Book Picker
 
 <p align="center">
-  <img width="416" height="405" src="https://github.com/ymxk/book-picker/blob/master/book-picker.gif">
+  <img width="416" height="405" src="https://raw.githubusercontent.com/ymxk/book-picker/master/book-picker.gif">
 </p>
 
 ##
