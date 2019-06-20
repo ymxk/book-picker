@@ -87,7 +87,7 @@ export class TimePickerComponent implements OnInit {
       if (changedProp.isFirstChange()) {
         this.nowTime = moment();
       } else {
-        // console.log(changedProp.currentValue);
+        this.onClear();
         this.nowTime = changedProp.currentValue;
         this.getHoursForDays();
       }
