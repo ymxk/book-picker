@@ -1,5 +1,4 @@
 <div class="book-info">
-	<label>共计0.5小时</label>
-  <div>3月21日 9:30～10:00 </div>
-  {{timeRange.start}} 
+	<label>共计 {{timeRange | booktime}} 小时</label>
+  <div> {{timeRange | timetable}} </div>
 </div>
