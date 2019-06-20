@@ -6,7 +6,6 @@
 - [Install](#install)
 - [Setup](#setup)
 - [Development](#development)
-- [Contribute](#contribute)
 
 ## Demo
 
