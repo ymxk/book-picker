@@ -1,10 +1,14 @@
 {
   "name": "book-picker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "keywords": [
     "bookings",
     "meeting rooms"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ymxk/book-picker.git"
+  },
   "author": "Keno",
   "license": "MIT",
   "peerDependencies": {
