@@ -13,7 +13,7 @@ import { BooktimePipe } from './pipe/booktime.pipe';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, MomentModule],
-  declarations: [TimePickerComponent, DatePickerComponent, BookInfoComponent, WeekdaysPipePipe, TimetablePipe, BooktimePipe],
-  // exports: [BookPickerComponent]
+  declarations: [TimePickerComponent, DatePickerComponent, BookInfoComponent, WeekdaysPipePipe, TimetablePipe, BooktimePipe, BookPickerComponent],
+  exports: [BookPickerComponent]
 })
 export class BookPickerModule { }
