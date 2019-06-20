@@ -1,6 +1,6 @@
 # Book Picker
 
-![book-picker in action]()
+![book-picker in action](https://github.com/ymxk/book-picker/blob/master/book-picker.gif)
 
 - [Demo](#demo)
 - [Install](#install)
