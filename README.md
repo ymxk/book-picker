@@ -45,7 +45,7 @@ export class YourAppComponent {}
 ```
 
 ```html
-<book-picker></book-picker>
+<book-picker (selected)="onSelected($event)"></book-picker>
 ```
 
 ## Development
