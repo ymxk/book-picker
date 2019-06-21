@@ -88,5 +88,7 @@ this project is using `np` package to publish, which makes things straightforwar
 
 > For more details, [please check np package on npmjs.com](https://www.npmjs.com/package/np)
 
+## License
 
+MIT
 
