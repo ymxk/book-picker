@@ -20,12 +20,10 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "projects/src/assets"
+              "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "projects/src/assets/font/iconfont/iconfont.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -107,7 +105,7 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/book-picker/tsconfig.lib.json",
-            "project": "projects/book-picker/ng-package.json"
+            "project": "projects/book-picker/ng-package.json",
           }
         },
         "test": {

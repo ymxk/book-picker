@@ -5,7 +5,7 @@ import { TimeRange } from './time-range';
 @Component({
   selector: 'book-picker',
   templateUrl: './book-picker.component.html',
-  styleUrls: ['./book-picker.component.css']
+  styleUrls: ['./book-picker.component.scss']
 })
 export class BookPickerComponent {
   name = 'Book Picker';

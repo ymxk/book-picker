@@ -3,7 +3,7 @@ import { TimeRange } from '../time-range';
 @Component({
   selector: 'app-book-info',
   templateUrl: './book-info.component.html',
-  styleUrls: ['./book-info.component.css']
+  styleUrls: ['./book-info.component.scss']
 })
 export class BookInfoComponent implements OnInit {
   @Input() timeRange: TimeRange;

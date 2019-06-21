@@ -5,7 +5,7 @@ import { TimeRange } from '../time-range';
 @Component({
   selector: 'app-time-picker',
   templateUrl: './time-picker.component.html',
-  styleUrls: ['./time-picker.component.css']
+  styleUrls: ['./time-picker.component.scss']
 })
 export class TimePickerComponent implements OnInit {
   hours: moment.Moment[] = [];
