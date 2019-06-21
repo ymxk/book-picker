@@ -12,11 +12,11 @@ export class TimetablePipe implements PipeTransform {
   }
 
   formatTime(value: TimeRange) {
-    return `${value.start.clone().subtract(30, 'm').format('YYYY-MM-D HH:mm')} ～ ${value.end.format('HH:mm')}`
+    return `${value.start.clone().subtract(30, 'm').format('M月D日 HH:mm')}～${value.end.format('HH:mm')}`
   }
 
   defaultFormatTime() {
-    return `${moment().format('YYYY-MM-D HH:mm')} ～ ${moment().format('HH:mm')}`
+    return `${moment().format('M月D日 HH:mm')}～${moment().format('HH:mm')}`
   }
 
 }
