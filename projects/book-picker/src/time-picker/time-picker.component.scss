@@ -1,36 +1,36 @@
 .card {
-	display:flex;
-	min-width:100%;
-	min-height:54px;
-  overflow-x: auto; 
-  border: 1px rgba(233,233,233,1) solid;
+  display: flex;
+  min-width: 100%;
+  min-height: 54px;
+  overflow-x: auto;
+  border: 1px rgba(233, 233, 233, 1) solid;
 }
 .card::-webkit-scrollbar {
-	display:none;
+  display: none;
 }
-.card div:first-child{
-   border-left: 0px !important;
+.card div:first-child {
+  border-left: 0px !important;
 }
 .card--content {
-	min-width: 55px;
-  height:54px;
-	background-color:#fff;
+  min-width: 55px;
+  height: 54px;
+  background-color: #fff;
   text-align: center;
-  border-left:1px rgba(233,233,233,1) solid;
+  border-left: 1px rgba(233, 233, 233, 1) solid;
 }
-.card--content  div:first-child {
-  font-size:13px;
-  font-family:PingFangSC-Regular;
-  font-weight:400;
-  color:rgba(36,36,36,1);
-  line-height:54px;
+.card--content div:first-child {
+  font-size: 13px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(36, 36, 36, 1);
+  line-height: 54px;
 }
-.time-disable{
-  background: #EDEDED;
-  opacity:0.17489999999999997;
+.time-disable {
+  background: #ededed;
+  opacity: 0.17489999999999997;
 }
-.time-selected div{
-  background:#E5F2FF !important;
-  color:#007AFF !important;
+.time-selected div {
+  background: #e5f2ff !important;
+  color: #007aff !important;
   border-left: 0px !important;
 }
