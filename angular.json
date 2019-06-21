@@ -105,7 +105,13 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/book-picker/tsconfig.lib.json",
-            "project": "projects/book-picker/ng-package.json"
+            "project": "projects/book-picker/ng-package.json",
+            "assets": [
+              "projects/book-picker/src/assets"
+            ],
+            "styles": [
+              "projects/book-picker/src/styles.scss"
+            ],
           }
         },
         "test": {
