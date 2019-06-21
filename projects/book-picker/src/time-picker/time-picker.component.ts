@@ -82,7 +82,6 @@ export class TimePickerComponent implements OnInit {
     let log: string[] = [];
     for (let propName in changes) {
       let changedProp = changes[propName];
-      let to = JSON.stringify(changedProp.currentValue);
       if (changedProp.isFirstChange()) {
         this.nowTime = moment();
       } else {

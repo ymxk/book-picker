@@ -15,6 +15,7 @@ export class BookPickerComponent {
 
   onSelectedDate(value: moment.Moment) {
     this.selectedDate = value.clone();
+    this.timeRange = null;
   }
 
   onSelectedTime(value: TimeRange) {

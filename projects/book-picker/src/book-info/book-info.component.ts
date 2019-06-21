@@ -12,5 +12,4 @@ export class BookInfoComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
