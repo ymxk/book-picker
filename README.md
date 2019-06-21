@@ -1,5 +1,9 @@
 # Book Picker
 
+Book Picker - An Angular Custom Component
+
+##
+
 <p align="center">
   <img width="416" height="405" src="https://raw.githubusercontent.com/ymxk/book-picker/master/book-picker.gif">
 </p>
