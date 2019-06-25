@@ -26,7 +26,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   emitSelected() {
-    this.selected.emit({ start: this.start, end: this.end });
+    this.selected.emit({ start: this.start, end: this.end.clone().add(30, 'm') });
   }
 
   onSelected(value: moment.Moment) {
