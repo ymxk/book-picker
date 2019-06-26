@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import moment from 'moment';
 import { TimeRange } from './time-range';
+import { Booked } from './booked';
 
 @Component({
   selector: 'book-picker',
@@ -11,8 +12,9 @@ export class BookPickerComponent {
   name = 'Book Picker';
   selectedDate: moment.Moment;
   timeRange: TimeRange;
+  @Input() bookeds: Booked[] = new Array();
   @Output() selected = new EventEmitter<any>();
-  
+
 
   onSelectedDate(value: moment.Moment) {
     this.selectedDate = value.clone();

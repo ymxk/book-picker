@@ -20,8 +20,6 @@ export class TimePickerComponent implements OnInit {
 
   ngOnInit() {
     this.getHoursForDays();
-    let booked = { start: moment(), end: moment().add(30, 'minute') }
-    this.bookeds.push(booked);
   }
 
   onClear() {
