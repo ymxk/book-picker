@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import moment from 'moment';
 import { TimeRange } from '../time-range';
+import { Booked } from '../booked';
 
 @Component({
   selector: 'app-time-picker',
@@ -10,6 +11,7 @@ import { TimeRange } from '../time-range';
 export class TimePickerComponent implements OnInit {
   hours: moment.Moment[] = [];
   @Input() nowTime: moment.Moment = moment();
+  @Input() bookeds: Booked[] = new Array();
   @Output() selected = new EventEmitter<TimeRange>();
   start: moment.Moment;
   end: moment.Moment;
@@ -18,6 +20,8 @@ export class TimePickerComponent implements OnInit {
 
   ngOnInit() {
     this.getHoursForDays();
+    let booked = { start: moment(), end: moment().add(30, 'minute') }
+    this.bookeds.push(booked);
   }
 
   onClear() {
@@ -26,7 +30,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   emitSelected() {
-    this.selected.emit({ start: this.start, end: this.end.clone().add(30, 'm') });
+    this.selected.emit({ start: this.start, end: this.end.clone().add(120, 'm') });
   }
 
   onSelected(value: moment.Moment) {
@@ -60,6 +64,10 @@ export class TimePickerComponent implements OnInit {
     }
     if (value.isBetween(this.start, this.end, 'minute') || value.isSame(this.start, 'minute') || value.isSame(this.end, 'minute')) {
       return 'time-selected'
+    }
+    let res = this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'minute') || value.isSame(e.start, 'minute') || value.isSame(e.end, 'minute'); });
+    if (res && res.length > 0) {
+      return 'time-booked'
     }
   }
 

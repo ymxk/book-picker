@@ -12,6 +12,7 @@ export class BookPickerComponent {
   selectedDate: moment.Moment;
   timeRange: TimeRange;
   @Output() selected = new EventEmitter<any>();
+  
 
   onSelectedDate(value: moment.Moment) {
     this.selectedDate = value.clone();
