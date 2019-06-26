@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   bookeds: any[] = new Array();
 
   ngOnInit() {
-    let booked = { start: moment().add(30, 'minute'), end: moment().add(60, 'minute') }
+    let booked = { start: moment().add(30, 'm'), end: moment().add(60, 'm') }
     this.bookeds.push(booked);
   }
 

@@ -32,12 +32,12 @@ export class TimePickerComponent implements OnInit {
   }
 
   onSelected(value: moment.Moment) {
-    if (this.start && this.end && this.start.isSame(value, 'minute')) {
+    if (this.start && this.end && this.start.isSame(value, 'm')) {
       this.start = this.end;
       this.emitSelected();
       return false;
     }
-    if (this.start && this.end && this.end.isSame(value, 'minute')) {
+    if (this.start && this.end && this.end.isSame(value, 'm')) {
       this.end = this.start;
       this.emitSelected();
       return false;
@@ -57,14 +57,14 @@ export class TimePickerComponent implements OnInit {
   }
 
   getBookedBy(value: moment.Moment) {
-    return this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'minute') || value.isSame(e.start, 'minute') || value.isSame(e.end, 'minute'); });
+    return this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'm') || value.isSame(e.start, 'm') || value.isSame(e.end, 'm'); });
   }
 
   getClassForTimeCell(value: moment.Moment) {
-    if (value.isBefore(this.nowTime, 'minute') && moment().isSame(this.nowTime, 'day')) {
+    if (value.isBefore(this.nowTime, 'm') && moment().isSame(this.nowTime, 'day')) {
       return 'time-disable';
     }
-    if (value.isBetween(this.start, this.end, 'minute') || value.isSame(this.start, 'minute') || value.isSame(this.end, 'minute')) {
+    if (value.isBetween(this.start, this.end, 'm') || value.isSame(this.start, 'm') || value.isSame(this.end, 'm')) {
       return 'time-selected';
     }
     let res = this.getBookedBy(value);
