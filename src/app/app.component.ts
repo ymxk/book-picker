@@ -18,4 +18,8 @@ export class AppComponent implements OnInit {
   onSelected(value: any) {
     console.log(value);
   }
+
+  onError(){
+    console.log('onError');
+  }
 }

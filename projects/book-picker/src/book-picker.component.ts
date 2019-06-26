@@ -14,6 +14,7 @@ export class BookPickerComponent {
   timeRange: TimeRange;
   @Input() bookeds: Booked[] = new Array();
   @Output() selected = new EventEmitter<any>();
+  @Output() onerror = new EventEmitter<any>();
 
 
   onSelectedDate(value: moment.Moment) {
@@ -24,5 +25,10 @@ export class BookPickerComponent {
   onSelectedTime(value: TimeRange) {
     this.timeRange = value;
     this.selected.emit(value);
+  }
+
+
+  onErrorTime() {
+    this.onerror.emit();
   }
 }

@@ -13,6 +13,7 @@ export class TimePickerComponent implements OnInit {
   @Input() nowTime: moment.Moment = moment();
   @Input() bookeds: Booked[] = new Array();
   @Output() selected = new EventEmitter<TimeRange>();
+  @Output() onerror = new EventEmitter<TimeRange>();
   start: moment.Moment;
   end: moment.Moment;
 
@@ -31,6 +32,10 @@ export class TimePickerComponent implements OnInit {
     this.selected.emit({ start: this.start, end: this.end.clone().add(30, 'm') });
   }
 
+  emitError() {
+    this.onerror.emit();
+  }
+
   onSelected(value: moment.Moment) {
     if (this.start && this.end && this.start.isSame(value, 'm')) {
       this.start = this.end;
@@ -47,17 +52,41 @@ export class TimePickerComponent implements OnInit {
       this.end = value;
     }
     if (value.isBefore(this.start)) {
-      this.end = this.start;
-      this.start = value;
+      let x = this.includesTime(value.clone(), this.start.clone());
+      if (x) {
+        this.emitError();
+        return false;
+      } else {
+        this.end = this.start;
+        this.start = value;
+      }
     }
     if (value.isAfter(this.start)) {
-      this.end = value;
+      let x = this.includesTime(this.start.clone(), value.clone());
+      if (x) {
+        this.emitError();
+        return false;
+      } else {
+        this.end = value;
+      }
     }
     this.emitSelected();
   }
 
-  getBookedBy(value: moment.Moment) {
-    return this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'm') || value.isSame(e.start, 'm') || value.isSame(e.end, 'm'); });
+  includesTime(start: moment.Moment, end: moment.Moment) {
+    let range = [];
+    for (let item = start; item.isBefore(end); item.add(30, 'm')) {
+      range.push(item.clone());
+    }
+    return range.filter(e => { return this.includesBooked(e); }).length > 0;
+  }
+
+  includesBooked(value: moment.Moment) {
+    return this.bookeds.filter(e => { return this.isBetween(value, e) }).length > 0;
+  }
+
+  isBetween(value: moment.Moment, b: Booked) {
+    return value.isBetween(b.start, b.end, 'm') || value.isSame(b.start, 'm') || value.isSame(b.end, 'm');
   }
 
   getClassForTimeCell(value: moment.Moment) {
@@ -67,8 +96,7 @@ export class TimePickerComponent implements OnInit {
     if (value.isBetween(this.start, this.end, 'm') || value.isSame(this.start, 'm') || value.isSame(this.end, 'm')) {
       return 'time-selected';
     }
-    let res = this.getBookedBy(value);
-    if (res && res.length > 0) {
+    if (this.includesBooked(value)) {
       return 'time-booked';
     }
     return '';
