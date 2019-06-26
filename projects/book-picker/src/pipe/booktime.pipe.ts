@@ -8,7 +8,7 @@ import { TimeRange } from '../time-range';
 export class BooktimePipe implements PipeTransform {
 
   transform(value: TimeRange): string {
-    return (value && value.end && value.start) ? `${moment.duration(value.end.diff(value.start.clone())).asHours()}` : '0';
+    return (value && value.end && value.start) ? `${moment.duration(value.end.diff(value.start.)).asHours()}` : '0';
   }
 
 }
