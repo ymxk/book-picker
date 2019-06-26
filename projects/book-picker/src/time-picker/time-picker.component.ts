@@ -56,8 +56,8 @@ export class TimePickerComponent implements OnInit {
     this.emitSelected();
   }
 
-  getBookedBy(value: moment.Moment){
-    return this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'minute') || value.isSame(e.start, 'minute') || value.isSame(e.end, 'minute');});
+  getBookedBy(value: moment.Moment) {
+    return this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'minute') || value.isSame(e.start, 'minute') || value.isSame(e.end, 'minute'); });
   }
 
   getClassForTimeCell(value: moment.Moment) {
