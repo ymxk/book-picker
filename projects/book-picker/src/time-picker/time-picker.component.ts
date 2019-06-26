@@ -28,7 +28,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   emitSelected() {
-    this.selected.emit({ start: this.start, end: this.end.clone().add(120, 'm') });
+    this.selected.emit({ start: this.start, end: this.end.clone().add(30, 'm') });
   }
 
   onSelected(value: moment.Moment) {
@@ -56,17 +56,22 @@ export class TimePickerComponent implements OnInit {
     this.emitSelected();
   }
 
+  getBookedBy(value: moment.Moment){
+    return this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'minute') || value.isSame(e.start, 'minute') || value.isSame(e.end, 'minute');});
+  }
+
   getClassForTimeCell(value: moment.Moment) {
     if (value.isBefore(this.nowTime, 'minute') && moment().isSame(this.nowTime, 'day')) {
-      return 'time-disable'
+      return 'time-disable';
     }
     if (value.isBetween(this.start, this.end, 'minute') || value.isSame(this.start, 'minute') || value.isSame(this.end, 'minute')) {
-      return 'time-selected'
+      return 'time-selected';
     }
-    let res = this.bookeds.filter(e => { return value.isBetween(e.start, e.end, 'minute') || value.isSame(e.start, 'minute') || value.isSame(e.end, 'minute'); });
+    let res = this.getBookedBy(value);
     if (res && res.length > 0) {
-      return 'time-booked'
+      return 'time-booked';
     }
+    return '';
   }
 
   getHoursForDays() {

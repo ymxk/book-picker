@@ -1,5 +1,11 @@
 <section class="card">
-	<div class="card--content" *ngFor="let h of hours" [ngClass]="getClassForTimeCell(h)" (click)="onSelected(h)">
-		<div>{{h | amDateFormat: 'HH:mm'}}</div>
+	<div class="card--content" *ngFor="let h of hours" [ngClass]="getClassForTimeCell(h)">
+		<div *ngIf="getClassForTimeCell(h) == ''; then thenBlock else elseBlock"></div>
+		<ng-template #thenBlock>
+			<div (click)="onSelected(h)">{{h | amDateFormat: 'HH:mm'}}</div>
+		</ng-template>
+		<ng-template #elseBlock>
+			<div>{{h | amDateFormat: 'HH:mm'}}</div>
+		</ng-template>
 	</div>
 </section>
