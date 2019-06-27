@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import moment from 'moment';
 import { TimeRange } from './time-range';
 import { Booked } from './booked';
+import { Hours } from './hours';
 
 @Component({
   selector: 'book-picker',
@@ -13,6 +14,7 @@ export class BookPickerComponent {
   selectedDate: moment.Moment;
   timeRange: TimeRange;
   @Input() bookeds: Booked[] = new Array();
+  @Input() hours: Hours[] = new Array();
   @Output() selected = new EventEmitter<any>();
   @Output() onerror = new EventEmitter<any>();
 
