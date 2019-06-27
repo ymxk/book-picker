@@ -12,17 +12,16 @@ export class AppComponent implements OnInit {
   hours: any[] = new Array();
 
   ngOnInit() {
-    let booked = { start: moment().add(30, 'm'), end: moment().add(60, 'm') }
-    this.bookeds.push(booked);
-    let booked2 = { start: moment().add(90, 'm'), end: moment().add(120, 'm') }
-     this.bookeds.push(booked2);
+    this.bookeds.push({ start: moment().add(30, 'm'), end: moment().add(60, 'm') });
+    this.bookeds.push({ start: moment().add(90, 'm'), end: moment().add(120, 'm') });
+    this.hours.push({ weeks: [1, 2, 3, 4], opens: moment().startOf('day').add(8, 'h'), closes: moment().endOf('day').subtract(4, 'h') });
   }
 
   onSelected(value: any) {
     console.log(value);
   }
 
-  onError(){
+  onError() {
     console.log('onError');
   }
 }

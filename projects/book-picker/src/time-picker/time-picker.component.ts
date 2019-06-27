@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter
 import moment from 'moment';
 import { TimeRange } from '../time-range';
 import { Booked } from '../booked';
+import { Hours } from '../hours';
 
 @Component({
   selector: 'app-time-picker',
@@ -9,9 +10,10 @@ import { Booked } from '../booked';
   styleUrls: ['./time-picker.component.scss']
 })
 export class TimePickerComponent implements OnInit {
-  hours: moment.Moment[] = [];
+  hoursOfDay: moment.Moment[] = [];
   @Input() nowTime: moment.Moment = moment();
   @Input() bookeds: Booked[] = new Array();
+  @Input() hours: Hours[] = new Array();
   @Output() selected = new EventEmitter<TimeRange>();
   @Output() onerror = new EventEmitter<TimeRange>();
   start: moment.Moment;
@@ -103,7 +105,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   getHoursForDays() {
-    this.hours = [];
+    this.hoursOfDay = [];
     let start;
     if (moment().isSame(this.nowTime, 'day')) {
       const y = parseFloat(moment().format('mm')) % 30;
@@ -112,8 +114,13 @@ export class TimePickerComponent implements OnInit {
       start = this.nowTime.startOf('day');
     }
     let end = start.clone().endOf('day');
+
+    this.hours.forEach(e => { });
+
+    console.log(this.hours);
+
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
-      this.hours.push(item.clone());
+      this.hoursOfDay.push(item.clone());
     }
   }
 
