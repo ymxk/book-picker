@@ -135,10 +135,9 @@ export class TimePickerComponent implements OnInit {
 
   createHours(oh: HoursOfDay) {
     let t = this.replaceStartByNow(oh);
-    console.log(t.start.format('YYYY-MM-DD HH-mm'), t.end.format('YYYY-MM-DD HH-mm'));
-    this.hoursOfDay = [];
     let start = t.start.clone();
     let end = t.end.clone();
+    
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
       this.hoursOfDay.push(item.clone());
     }
