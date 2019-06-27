@@ -1,22 +1,24 @@
+$border-style: 1px rgba(233, 233, 233, 1) solid;
 .card {
   display: flex;
   min-width: 100%;
   min-height: 54px;
   overflow-x: auto;
-  border: 1px rgba(233, 233, 233, 1) solid;
+  border-top: $border-style;
+  border-bottom: $border-style;
 }
 .card::-webkit-scrollbar {
   display: none;
 }
-.card div:first-child {
-  border-left: 0px !important;
+.card .card--content:last-child {
+  border-right: $border-style;
 }
 .card--content {
   min-width: 55px;
   height: 54px;
   background-color: #fff;
   text-align: center;
-  border-left: 1px rgba(233, 233, 233, 1) solid;
+  border-left: $border-style;
 }
 .card--content div:first-child {
   font-size: 13px;
