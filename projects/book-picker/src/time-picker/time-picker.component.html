@@ -1,4 +1,5 @@
 <section class="card">
+  
 	<div *ngFor="let h of hoursOfDay" [ngClass]="getClassForTimeCell(h)">
 		<div *ngIf="['','time-selected'].includes(getClassForTimeCell(h)); then thenBlock else elseBlock"></div>
 		<ng-template #thenBlock>
