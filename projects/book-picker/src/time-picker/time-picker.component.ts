@@ -105,14 +105,18 @@ export class TimePickerComponent implements OnInit {
     return '';
   }
 
+  isSameDay(v: moment.Moment) {
+    return moment().isSame(v, 'month') && moment().isSame(v, 'day');
+  }
+
   getDefaultOpenHours() {
     return new HoursOfDay(this.nowTime.clone().startOf('day'), this.nowTime.clone().endOf('day'));
   }
 
   replaceStartByNow(oh: HoursOfDay) {
-    if (moment().isSame(oh.start, 'day')) {
-      const y = parseFloat(moment().format('mm')) % 30;
-      return new HoursOfDay(moment().subtract(y, 'm').add(30, 'm'), oh.end);
+    if (this.isSameDay(oh.start)) {
+      const y = parseFloat(this.nowTime.clone().format('mm')) % 30;
+      return new HoursOfDay(this.nowTime.clone().subtract(y, 'm').add(30, 'm'), oh.end);
     }
     return oh;
   }
@@ -121,15 +125,17 @@ export class TimePickerComponent implements OnInit {
     let oh = this.getOpenHoursOnDated();
     if (oh && oh.length > 0) {
       let ohs = oh[0];
-      this.createHours({ start: ohs.opens, end: ohs.closes });
+      let s = this.nowTime.clone().hour(ohs.opens.hour()).minute(ohs.opens.minute());
+      let e = this.nowTime.clone().hour(ohs.closes.hour()).minute(ohs.closes.minute());
+      this.createHours(new HoursOfDay(s, e));
     } else {
       this.createHours(this.getDefaultOpenHours());
     }
   }
 
   createHours(oh: HoursOfDay) {
-    console.log(oh.start.format('YYYY-MM-DD HH-mm'), oh.end.format('YYYY-MM-DD HH-mm'));
     let t = this.replaceStartByNow(oh);
+    console.log(t.start.format('YYYY-MM-DD HH-mm'), t.end.format('YYYY-MM-DD HH-mm'));
     this.hoursOfDay = [];
     let start = t.start.clone();
     let end = t.end.clone();
