@@ -3,6 +3,7 @@ import moment from 'moment';
 import { TimeRange } from '../time-range';
 import { Booked } from '../booked';
 import { Hours } from '../hours';
+import { HoursOfDay } from './hours-of-day';
 
 @Component({
   selector: 'app-time-picker',
@@ -104,24 +105,41 @@ export class TimePickerComponent implements OnInit {
     return '';
   }
 
-  getHoursForDays() {
-    this.hoursOfDay = [];
-    let start;
-    if (moment().isSame(this.nowTime, 'day')) {
+  getDefaultOpenHours() {
+    return new HoursOfDay(this.nowTime.clone().startOf('day'), this.nowTime.clone().endOf('day'));
+  }
+
+  replaceStartByNow(oh: HoursOfDay) {
+    if (moment().isSame(oh.start, 'day')) {
       const y = parseFloat(moment().format('mm')) % 30;
-      start = moment().subtract(y, 'm').add(30, 'm');
-    } else {
-      start = this.nowTime.startOf('day');
+      return new HoursOfDay(moment().subtract(y, 'm').add(30, 'm'), oh.end);
     }
-    let end = start.clone().endOf('day');
+    return oh;
+  }
 
-    this.hours.forEach(e => { });
+  getHoursForDays() {
+    let oh = this.getOpenHoursOnDated();
+    if (oh && oh.length > 0) {
+      let ohs = oh[0];
+      this.createHours({ start: ohs.opens, end: ohs.closes });
+    } else {
+      this.createHours(this.getDefaultOpenHours());
+    }
+  }
 
-    console.log(this.hours);
-
+  createHours(oh: HoursOfDay) {
+    console.log(oh.start.format('YYYY-MM-DD HH-mm'), oh.end.format('YYYY-MM-DD HH-mm'));
+    let t = this.replaceStartByNow(oh);
+    this.hoursOfDay = [];
+    let start = t.start.clone();
+    let end = t.end.clone();
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
       this.hoursOfDay.push(item.clone());
     }
+  }
+
+  getOpenHoursOnDated() {
+    return this.hours.filter((e: Hours) => { return e.weeks.includes(this.nowTime.day()); });
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
