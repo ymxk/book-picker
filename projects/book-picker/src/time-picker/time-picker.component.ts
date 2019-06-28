@@ -139,7 +139,7 @@ export class TimePickerComponent implements OnInit {
     let t = this.replaceStartByNow(oh);
     let start = t.start.clone();
     let end = t.end.clone();
-    this.hoursOfDay = [];
+    this.hourtimeCellssOfDay = [];
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
       this.timeCells.push(new TimeCell(item.clone(), TimeStatus.NOMAL));
     }
