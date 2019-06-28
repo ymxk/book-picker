@@ -4,6 +4,8 @@ import { TimeRange } from '../time-range';
 import { Booked } from '../booked';
 import { Hours } from '../hours';
 import { HoursOfDay } from './hours-of-day';
+import { TimeCell } from './time-cell';
+import { TimeStatus } from './time-status';
 
 @Component({
   selector: 'app-time-picker',
@@ -11,7 +13,7 @@ import { HoursOfDay } from './hours-of-day';
   styleUrls: ['./time-picker.component.scss']
 })
 export class TimePickerComponent implements OnInit {
-  hoursOfDay: moment.Moment[] = [];
+  timeCells: TimeCell[] = [];
   @Input() nowTime: moment.Moment = moment();
   @Input() bookeds: Booked[] = new Array();
   @Input() hours: Hours[] = new Array();
@@ -139,7 +141,7 @@ export class TimePickerComponent implements OnInit {
     let end = t.end.clone();
     this.hoursOfDay = [];
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
-      this.hoursOfDay.push(item.clone());
+      this.timeCells.push(new TimeCell(item.clone(), TimeStatus.NOMAL));
     }
   }
 
