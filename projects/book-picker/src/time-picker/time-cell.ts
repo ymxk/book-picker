@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { TimeStatus } from './time-status';
+import { TimeStatus } from './time-status.enum';
 
 export class TimeCell {
   cell: moment.Moment;
