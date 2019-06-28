@@ -5,7 +5,7 @@ import { Booked } from '../booked';
 import { Hours } from '../hours';
 import { HoursOfDay } from './hours-of-day';
 import { TimeCell } from './time-cell';
-import { TimeStatus } from './time-status';
+import { TimeStatus } from './time-status.enum';
 
 @Component({
   selector: 'app-time-picker',
