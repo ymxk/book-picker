@@ -1,12 +1,12 @@
 <section class="card">
 
-	<div *ngFor="let c of timeCells" [ngClass]="getClassForTimeCell(c.cell)">
-		<div *ngIf="['','time-selected'].includes(getClassForTimeCell(c.cell)); then thenBlock else elseBlock"></div>
+	<div *ngFor="let c of timeCells" [ngClass]="getClassForTimeCell(c)">
+		<div *ngIf="['','time-selected'].includes(getClassForTimeCell(c)); then thenBlock else elseBlock"></div>
 		<ng-template #thenBlock>
-			<div (click)="onSelected(h)">{{c.cell | amDateFormat: 'HH:mm'}}</div>
+			<div (click)="onSelected(h)">{{c | amDateFormat: 'HH:mm'}}</div>
 		</ng-template>
 		<ng-template #elseBlock>
-			<div>{{c.cell | amDateFormat: 'HH:mm'}}</div>
+			<div>{{c | amDateFormat: 'HH:mm'}}</div>
 		</ng-template>
 	</div>
 </section>
