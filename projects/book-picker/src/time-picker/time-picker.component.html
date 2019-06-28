@@ -3,7 +3,7 @@
 	<div *ngFor="let c of timeCells" [ngClass]="getClassForTimeCell(c)">
 		<div *ngIf="['','time-selected'].includes(getClassForTimeCell(c)); then thenBlock else elseBlock"></div>
 		<ng-template #thenBlock>
-			<div (click)="onSelected(h)">{{c | amDateFormat: 'HH:mm'}}</div>
+			<div (click)="onSelected(c)">{{c | amDateFormat: 'HH:mm'}}</div>
 		</ng-template>
 		<ng-template #elseBlock>
 			<div>{{c | amDateFormat: 'HH:mm'}}</div>

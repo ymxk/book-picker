@@ -4,6 +4,7 @@ import { TimeRange } from '../time-range';
 import { Booked } from '../booked';
 import { Hours } from '../hours';
 import { HoursOfDay } from './hours-of-day';
+import jspath from "jspath";
 
 @Component({
   selector: 'app-time-picker',
@@ -53,54 +54,78 @@ export class TimePickerComponent implements OnInit {
     if (!this.start && !this.end) {
       this.start = value;
       this.end = value;
+      return false;
     }
     if (value.isBefore(this.start)) {
-      let x = this.includesTime(value.clone(), this.start.clone());
+      let x = this.includesDisable(value.clone(), this.start.clone());
       if (x) {
         this.emitError();
         return false;
-      } else {
-        this.end = this.start;
-        this.start = value;
       }
+      this.end = this.start;
+      this.start = value;
     }
     if (value.isAfter(this.start)) {
-      let x = this.includesTime(this.start.clone(), value.clone());
+      let x = this.includesDisable(this.start.clone(), value.clone());
       if (x) {
         this.emitError();
         return false;
-      } else {
-        this.end = value;
       }
+      this.end = value;
     }
     this.emitSelected();
   }
 
-  includesTime(start: moment.Moment, end: moment.Moment) {
+  includesDisable(start: moment.Moment, end: moment.Moment) {
     let range = [];
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
       range.push(item.clone());
     }
-    return range.filter(e => { return this.includesBooked(e); }).length > 0;
+    // console.log(range.filter(e => { return this.includesBooked(e) || this.includesCloses(e) ; }));
+    return range.filter(e => { return this.includesBooked(e) || this.includesCloses(e); }).length > 0;
   }
 
-  includesBooked(value: moment.Moment) {
-    return this.bookeds.filter(e => { return this.isBetween(value, e) }).length > 0;
+  includesBooked(v: moment.Moment) {
+    // console.log(this.bookeds.filter(e => { return this.isBetween(v, e.start, e.end) }));
+    return this.bookeds.filter(e => { return this.isBetweenX(v, e.start, e.end) }).length > 0;
   }
 
-  isBetween(value: moment.Moment, b: Booked) {
-    return value.isBetween(b.start, b.end, 'm') || value.isSame(b.start, 'm') || value.isSame(b.end, 'm');
+  includesCloses(v: moment.Moment) {
+    let ph = this.getOpenHoursOnDated();
+    if (ph && ph.length == 0) {
+      return false;
+    }
+    console.log(v.format('YYYY-MM-DD HH:mm'));
+    return ph.filter(e => { return this.isBetweenNotEnd(v, e.opens, e.closes); }).length == 0;
+  }
+
+  isBetweenNotEnd(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
+    let vs = this.setHourMinuteIgnorDate(v);
+    let ss = this.setHourMinuteIgnorDate(s);
+    let es = this.setHourMinuteIgnorDate(e);
+    if (vs.isBetween(ss, es, 'm')) {
+
+      return true;
+    }
+    if (vs.isSame(ss, 'm')) {
+      return true;
+    }
+    return false;
+  }
+
+  isBetweenX(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
+    return v.isBetween(s, e, 'm') || v.isSame(s, 'm') || v.isSame(e, 'm');
   }
 
   getClassForTimeCell(value: moment.Moment) {
-    if (value.isBefore(this.nowTime, 'm') && moment().isSame(this.nowTime, 'day')) {
-      return 'time-disable';
-    }
-    if (value.isBetween(this.start, this.end, 'm') || value.isSame(this.start, 'm') || value.isSame(this.end, 'm')) {
-      return 'time-selected';
-    }
     if (this.includesBooked(value)) {
       return 'time-booked';
+    }
+    if (this.includesCloses(value)) {
+      return 'time-disable';
+    }
+    if (this.isBetweenX(value, this.start, this.end)) {
+      return 'time-selected';
     }
     return '';
   }
@@ -114,7 +139,8 @@ export class TimePickerComponent implements OnInit {
   }
 
   replaceStartByNow(oh: HoursOfDay) {
-    if (this.isSameDay(oh.start)) {
+    let start = this.setHourMinuteIgnorDate(oh.start);
+    if (this.isSameDay(start)) {
       const y = parseFloat(this.nowTime.clone().format('mm')) % 30;
       return new HoursOfDay(this.nowTime.clone().subtract(y, 'm').add(30, 'm'), oh.end);
     }
@@ -124,13 +150,14 @@ export class TimePickerComponent implements OnInit {
   getHoursForDays() {
     let oh = this.getOpenHoursOnDated();
     if (oh && oh.length > 0) {
-      let ohs = oh[0];
-      let s = this.nowTime.clone().hour(ohs.opens.hour()).minute(ohs.opens.minute());
-      let e = this.nowTime.clone().hour(ohs.closes.hour()).minute(ohs.closes.minute());
-      this.createHours(new HoursOfDay(s, e));
+      this.createHours(this.toHoursOfDayFrom(oh));
     } else {
       this.createHours(this.getDefaultOpenHours());
     }
+  }
+
+  setHourMinuteIgnorDate(v: moment.Moment) {
+    return this.nowTime.clone().hour(v.hour()).minute(v.minute());
   }
 
   createHours(oh: HoursOfDay) {
@@ -144,7 +171,13 @@ export class TimePickerComponent implements OnInit {
   }
 
   getOpenHoursOnDated() {
-    return this.hours.filter((e: Hours) => { return e.weeks.includes(this.nowTime.day()); });
+    return this.hours.filter((e: Hours) => { return e.weeks.includes(this.nowTime.day()); })
+  };
+
+  toHoursOfDayFrom(ts: Hours[]) {
+    const opens = jspath.apply(`.opens`, ts);
+    const closes = jspath.apply(`.closes`, ts);
+    return new HoursOfDay(moment.min(opens), moment.max(closes));
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
