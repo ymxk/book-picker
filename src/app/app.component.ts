@@ -12,8 +12,8 @@ export class AppComponent implements OnInit {
   hours: any[] = new Array();
 
   ngOnInit() {
-    // this.bookeds.push({ start: moment().add(30, 'm'), end: moment().add(60, 'm') });
-    // this.bookeds.push({ start: moment().add(90, 'm'), end: moment().add(120, 'm') });
+    this.bookeds.push({ start: moment().add(30, 'm'), end: moment().add(60, 'm') });
+    this.bookeds.push({ start: moment().add(90, 'm'), end: moment().add(120, 'm') });
     this.hours.push({ weeks: [1, 2, 3, 4], opens: moment().clone().hours(8).minutes(0), closes: moment().clone().hours(12).minutes(0) });
     this.hours.push({ weeks: [1, 2, 3, 4], opens: moment().clone().hours(14).minutes(0), closes: moment().clone().hours(21).minutes(0) });
   }
