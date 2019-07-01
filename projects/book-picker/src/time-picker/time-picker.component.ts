@@ -123,7 +123,7 @@ export class TimePickerComponent implements OnInit {
     return v.isBetween(s, e, 'm') || v.isSame(s, 'm') || v.isSame(e, 'm');
   }
 
-  getClassForTimeCell(value: moment.Moment) {
+  getClassBy(value: moment.Moment) {
     if (this.includesBooked(value)) {
       return 'time-booked';
     }

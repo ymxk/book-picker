@@ -1,6 +1,6 @@
 <section class="card">
 
-	<div *ngFor="let c of timeCells" [ngClass]="getClassForTimeCell(c)">
+	<div *ngFor="let c of timeCells" [ngClass]="getClassBy(c)">
 		<div (click)="onSelected(c)">{{c | amDateFormat: 'HH:mm'}}</div>
 	</div>
 </section>
