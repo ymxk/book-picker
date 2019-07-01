@@ -59,6 +59,7 @@ export class TimePickerComponent implements OnInit {
       }
       this.start = value;
       this.end = value;
+      this.emitSelected();
       return false;
     }
     if (value.isBefore(this.start)) {
@@ -86,6 +87,7 @@ export class TimePickerComponent implements OnInit {
     for (let item = start; item.isBefore(end) || item.isSame(end); item.add(30, 'm')) {
       range.push(item.clone());
     }
+
     return range.filter(e => { return this.includesBooked(e) || this.includesCloses(e); }).length > 0;
   }
 
