@@ -32,7 +32,7 @@ $border-style: 1px rgba(233, 233, 233, 1) solid;
 }
 .time-disable div {
   background: #fbfbfb;
-  color: #C4C4C4 !important;
+  color: #c4c4c4 !important;
 }
 .time-selected div {
   background: #e5f2ff !important;
@@ -42,13 +42,14 @@ $border-style: 1px rgba(233, 233, 233, 1) solid;
 
 .time-booked div {
   background: #fbfbfb;
-  color: #C4C4C4 !important;
+  color: #c4c4c4 !important;
+  line-height: 14px !important;
+  padding: 20px 0px 0px 2px;
 }
 
-.time-booked ::before {
-  content:"已预订";
-  position: absolute;
-  padding: 14px 0px 0px 2px;
+.time-booked ::after {
+  content:"\00000a 已预订";
+  white-space: pre-wrap;
   font-size:10px;
-  color: #C4C4C4;
+  color: #c4c4c4;
 }
