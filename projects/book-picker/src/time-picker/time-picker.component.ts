@@ -52,6 +52,11 @@ export class TimePickerComponent implements OnInit {
       return false;
     }
     if (!this.start && !this.end) {
+      let x = this.includesDisable(value.clone(), value.clone());
+      if (x) {
+        this.emitError();
+        return false;
+      }
       this.start = value;
       this.end = value;
       return false;
@@ -78,13 +83,14 @@ export class TimePickerComponent implements OnInit {
 
   includesDisable(start: moment.Moment, end: moment.Moment) {
     let range = [];
-    for (let item = start; item.isBefore(end); item.add(30, 'm')) {
+    for (let item = start; item.isBefore(end) || item.isSame(end); item.add(30, 'm')) {
       range.push(item.clone());
     }
     return range.filter(e => { return this.includesBooked(e) || this.includesCloses(e); }).length > 0;
   }
 
   includesBooked(v: moment.Moment) {
+    // console.log(v.format('YYYY-MM-DD HH:mm'),this.bookeds.filter(e => { return this.isBetweenDate(v, e.start, e.end) }));
     return this.bookeds.filter(e => { return this.isBetweenDate(v, e.start, e.end) }).length > 0;
   }
 
