@@ -87,7 +87,6 @@ export class TimePickerComponent implements OnInit {
     for (let item = start; item.isBefore(end) || item.isSame(end); item.add(30, 'm')) {
       range.push(item.clone());
     }
-
     return range.filter(e => { return this.includesBooked(e) || this.includesCloses(e); }).length > 0;
   }
 
@@ -118,7 +117,8 @@ export class TimePickerComponent implements OnInit {
   }
 
   isBetweenDate(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
-    return v.isBetween(s, e, 'm') || v.isSame(s, 'm') || v.isSame(e, 'm');
+    // console.log(v.format('YYYY-MM-DD HH:mm'), s.format('YYYY-MM-DD HH:mm'),e.format('YYYY-MM-DD HH:mm'));
+    return v.isBetween(s, e) || v.isSame(s) || v.isSame(e);
   }
 
   isBetweenM(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
@@ -126,6 +126,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   getClassBy(value: moment.Moment) {
+    // console.log(value.format('YYYY-MM-DD HH:mm'));
     if (this.includesBooked(value)) {
       return 'time-booked';
     }
@@ -147,6 +148,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   replaceStartByNow(oh: HoursOfDay) {
+
     let start = this.setHourMinuteIgnorDate(oh.start);
     if (this.isSameDay(start)) {
       const y = parseFloat(this.nowTime.clone().format('mm')) % 30;
@@ -185,7 +187,7 @@ export class TimePickerComponent implements OnInit {
   toHoursOfDayFrom(ts: Hours[]) {
     const opens = jspath.apply(`.opens`, ts);
     const closes = jspath.apply(`.closes`, ts);
-    return new HoursOfDay(moment.min(opens), moment.max(closes));
+    return new HoursOfDay(this.setHourMinuteIgnorDate(moment.min(opens)), this.setHourMinuteIgnorDate(moment.max(closes)));
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
