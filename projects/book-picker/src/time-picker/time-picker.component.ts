@@ -81,13 +81,11 @@ export class TimePickerComponent implements OnInit {
     for (let item = start; item.isBefore(end); item.add(30, 'm')) {
       range.push(item.clone());
     }
-    // console.log(range.filter(e => { return this.includesBooked(e) || this.includesCloses(e) ; }));
     return range.filter(e => { return this.includesBooked(e) || this.includesCloses(e); }).length > 0;
   }
 
   includesBooked(v: moment.Moment) {
-    // console.log(this.bookeds.filter(e => { return this.isBetween(v, e.start, e.end) }));
-    return this.bookeds.filter(e => { return this.isBetweenX(v, e.start, e.end) }).length > 0;
+    return this.bookeds.filter(e => { return this.isBetweenDate(v, e.start, e.end) }).length > 0;
   }
 
   includesCloses(v: moment.Moment) {
@@ -95,7 +93,6 @@ export class TimePickerComponent implements OnInit {
     if (ph && ph.length == 0) {
       return false;
     }
-    console.log(v.format('YYYY-MM-DD HH:mm'));
     return ph.filter(e => { return this.isBetweenNotEnd(v, e.opens, e.closes); }).length == 0;
   }
 
@@ -113,7 +110,11 @@ export class TimePickerComponent implements OnInit {
     return false;
   }
 
-  isBetweenX(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
+  isBetweenDate(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
+    return v.isBetween(s, e, 'm') || v.isSame(s, 'm') || v.isSame(e, 'm');
+  }
+
+  isBetweenM(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
     return v.isBetween(s, e, 'm') || v.isSame(s, 'm') || v.isSame(e, 'm');
   }
 
@@ -124,7 +125,7 @@ export class TimePickerComponent implements OnInit {
     if (this.includesCloses(value)) {
       return 'time-disable';
     }
-    if (this.isBetweenX(value, this.start, this.end)) {
+    if (this.isBetweenM(value, this.start, this.end)) {
       return 'time-selected';
     }
     return '';
