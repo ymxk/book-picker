@@ -90,7 +90,6 @@ export class TimePickerComponent implements OnInit {
   }
 
   includesBooked(v: moment.Moment) {
-    // console.log(v.format('YYYY-MM-DD HH:mm'),this.bookeds.filter(e => { return this.isBetweenDate(v, e.start, e.end) }));
     return this.bookeds.filter(e => { return this.isBetweenDate(v, e.start, e.end) }).length > 0;
   }
 
