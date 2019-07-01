@@ -148,7 +148,6 @@ export class TimePickerComponent implements OnInit {
   }
 
   replaceStartByNow(oh: HoursOfDay) {
-
     let start = this.setHourMinuteIgnorDate(oh.start);
     if (this.isSameDay(start)) {
       const y = parseFloat(this.nowTime.clone().format('mm')) % 30;
