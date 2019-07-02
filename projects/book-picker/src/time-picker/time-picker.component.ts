@@ -177,6 +177,10 @@ export class TimePickerComponent implements OnInit {
     }
   }
 
+  createTimeArray(){
+    
+  }
+
   getOpenHoursOnDated() {
     return this.hours.filter((e: Hours) => { return e.weeks.includes(this.nowTime.day()); })
   };
