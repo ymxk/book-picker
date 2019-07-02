@@ -117,7 +117,6 @@ export class TimePickerComponent implements OnInit {
   }
 
   isBetweenDate(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
-    // console.log(v.format('YYYY-MM-DD HH:mm'), s.format('YYYY-MM-DD HH:mm'),e.format('YYYY-MM-DD HH:mm'));
     return v.isBetween(s, e) || v.isSame(s) || v.isSame(e);
   }
 
@@ -125,8 +124,7 @@ export class TimePickerComponent implements OnInit {
     return v.isBetween(s, e, 'm') || v.isSame(s, 'm') || v.isSame(e, 'm');
   }
 
-  getClassBy(value: moment.Moment) {
-    // console.log(value.format('YYYY-MM-DD HH:mm'));
+  getClassBy(value: moment.Moment) { 
     if (this.includesBooked(value)) {
       return 'time-booked';
     }
