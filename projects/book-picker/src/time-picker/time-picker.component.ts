@@ -138,7 +138,7 @@ export class TimePickerComponent implements OnInit {
     if (this.isBetweenM(value, this.start, this.end)) {
       return TimeClass.SELECTED;
     }
-    return '';
+    return TimeClass.NORMAL;
   }
 
   isSameDay(v: moment.Moment) {
