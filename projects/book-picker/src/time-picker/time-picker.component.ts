@@ -4,6 +4,7 @@ import { TimeRange } from '../time-range';
 import { Booked } from '../booked';
 import { Hours } from '../hours';
 import { HoursOfDay } from './hours-of-day';
+import { TimeClass } from './time-class.enum';
 import jspath from "jspath";
 
 @Component({
@@ -107,7 +108,6 @@ export class TimePickerComponent implements OnInit {
     let ss = this.setHourMinuteIgnorDate(s);
     let es = this.setHourMinuteIgnorDate(e);
     if (vs.isBetween(ss, es, 'm')) {
-
       return true;
     }
     if (vs.isSame(ss, 'm')) {
@@ -126,13 +126,13 @@ export class TimePickerComponent implements OnInit {
 
   getClassBy(value: moment.Moment) { 
     if (this.includesBooked(value)) {
-      return 'time-booked';
+      return TimeClass.BOOKED;
     }
     if (this.includesCloses(value)) {
-      return 'time-disable';
+      return TimeClass.DISABLE;
     }
     if (this.isBetweenM(value, this.start, this.end)) {
-      return 'time-selected';
+      return TimeClass.SELECTED;
     }
     return '';
   }
