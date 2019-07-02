@@ -25,6 +25,7 @@ export class TimePickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.start);
     this.getHoursForDays();
   }
 
@@ -34,7 +35,11 @@ export class TimePickerComponent implements OnInit {
   }
 
   emitSelected() {
-    this.selected.emit({ start: this.start, end: this.end.clone().add(30, 'm') });
+    this.selected.emit({ start: this.start, end: this.addHalfHour(this.end) });
+  }
+
+  addHalfHour(v: moment.Moment) {
+    return v ? v.clone().add(30, 'm') : null;
   }
 
   emitError() {
@@ -42,6 +47,11 @@ export class TimePickerComponent implements OnInit {
   }
 
   onSelected(value: moment.Moment) {
+    if (this.start && this.end && this.start.isSame(value, 'm') && this.end.isSame(value, 'm')) {
+      this.onClear();
+      this.emitSelected();
+      return false;
+    }
     if (this.start && this.end && this.start.isSame(value, 'm')) {
       this.start = this.end;
       this.emitSelected();
@@ -124,7 +134,7 @@ export class TimePickerComponent implements OnInit {
     return v.isBetween(s, e, 'm') || v.isSame(s, 'm') || v.isSame(e, 'm');
   }
 
-  getClassBy(value: moment.Moment) { 
+  getClassBy(value: moment.Moment) {
     if (this.includesBooked(value)) {
       return TimeClass.BOOKED;
     }
@@ -145,11 +155,16 @@ export class TimePickerComponent implements OnInit {
     return new HoursOfDay(this.nowTime.clone().startOf('day'), this.nowTime.clone().endOf('day'));
   }
 
+  nextHalfHourInNow() {
+    const y = parseFloat(this.nowTime.clone().format('mm')) % 30;
+    return this.addHalfHour(this.nowTime.clone().subtract(y, 'm').);
+  }
+
   replaceStartByNow(oh: HoursOfDay) {
     let start = this.setHourMinuteIgnorDate(oh.start);
     if (this.isSameDay(start)) {
-      const y = parseFloat(this.nowTime.clone().format('mm')) % 30;
-      return new HoursOfDay(this.nowTime.clone().subtract(y, 'm').add(30, 'm'), oh.end);
+
+      return new HoursOfDay(this.nextHalfHourInNow(), oh.end);
     }
     return oh;
   }
@@ -176,8 +191,6 @@ export class TimePickerComponent implements OnInit {
       this.timeCells.push(item.clone());
     }
   }
-
-  createTimeArray(){ }
 
   getOpenHoursOnDated() {
     return this.hours.filter((e: Hours) => { return e.weeks.includes(this.nowTime.day()); })
