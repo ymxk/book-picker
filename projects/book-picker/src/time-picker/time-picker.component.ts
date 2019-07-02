@@ -117,13 +117,7 @@ export class TimePickerComponent implements OnInit {
     let vs = this.setHourMinuteIgnorDate(v);
     let ss = this.setHourMinuteIgnorDate(s);
     let es = this.setHourMinuteIgnorDate(e);
-    if (vs.isBetween(ss, es, 'm')) {
-      return true;
-    }
-    if (vs.isSame(ss, 'm')) {
-      return true;
-    }
-    return false;
+    return (vs.isBetween(ss, es, 'm') || vs.isSame(ss, 'm')) ? true : false;
   }
 
   isBetweenDate(v: moment.Moment, s: moment.Moment, e: moment.Moment) {
@@ -157,7 +151,7 @@ export class TimePickerComponent implements OnInit {
 
   nextHalfHourInNow() {
     const y = parseFloat(this.nowTime.clone().format('mm')) % 30;
-    return this.addHalfHour(this.nowTime.clone().subtract(y, 'm').);
+    return this.addHalfHour(this.nowTime.clone().subtract(y, 'm'));
   }
 
   replaceStartByNow(oh: HoursOfDay) {
