@@ -34,7 +34,8 @@ $border-style: 1px rgba(233, 233, 233, 1) solid;
 .time-disable div {
   background: #fbfbfb;
   color: #c4c4c4 !important;
-  
+  line-height: 14px !important;
+  padding: 20px 0px 0px 2px;
 }
 
 .time-disable ::after {
