@@ -25,8 +25,17 @@ export class TimePickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.start);
+    this.initBooksOrHours();
     this.getHoursForDays();
+  }
+
+  initBooksOrHours() {
+    if (!this.bookeds) {
+      this.bookeds = new Array();
+    }
+    if (!this.hours) {
+      this.hours = new Array();
+    }
   }
 
   onClear() {
