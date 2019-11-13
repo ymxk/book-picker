@@ -1,4 +1,4 @@
-<div class="book-info">
+<div class="book-info" *ngIf="timeRange && timeRange.start && timeRange.end">
 	<label>共计 {{timeRange | booktime}} 小时</label>
   <div><i class="iconfont icon-clock"></i> {{timeRange | timetable}} </div>
 </div>
