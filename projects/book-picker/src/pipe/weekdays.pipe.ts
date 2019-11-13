@@ -7,7 +7,7 @@ import moment from 'moment';
 export class WeekdaysPipe implements PipeTransform {
   now: any = moment();
   weekdays: string[] = [
-    "天", "一", "二", "三", "四", "五", "六"
+    "日", "一", "二", "三", "四", "五", "六"
   ]
 
   transform(value: moment.Moment): string {
