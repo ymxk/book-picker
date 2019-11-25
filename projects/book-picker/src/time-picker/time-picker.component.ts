@@ -117,7 +117,7 @@ export class TimePickerComponent implements OnInit {
   includesCloses(v: moment.Moment) {
     let ph = this.getOpenHoursOnDated();
     if (ph && ph.length == 0) {
-      return false;
+      return true;
     }
     return ph.filter(e => { return this.isBetweenNotEnd(v, e.opens, e.closes); }).length == 0;
   }
@@ -196,7 +196,9 @@ export class TimePickerComponent implements OnInit {
   }
 
   getOpenHoursOnDated() {
-    return this.hours.filter((e: Hours) => { return e.weeks.includes(this.nowTime.day()); })
+    return this.hours.filter((e: Hours) => {
+      return e.weeks.includes(this.nowTime.day()); 
+    })
   };
 
   toHoursOfDayFrom(ts: Hours[]) {
